@@ -205,19 +205,17 @@ export const MRT_TableBodyCell = <TData extends Record<string, any> = {}>({
       {...tableCellProps}
       onDragEnter={handleDragEnter}
       onDoubleClick={handleDoubleClick}
-      style={(theme) => ({
+      style={{
+        height: density === 'xs' ? "1.5rem" : density === 'md' ? "2rem" : "3rem",
+      }}
+      sx={(theme) => ({
         alignItems: layoutMode === 'grid' ? 'center' : undefined,
         cursor:
           isEditable && editDisplayMode === 'cell' ? 'pointer' : 'inherit',
         justifyContent:
           layoutMode === 'grid' ? tableCellProps.align : undefined,
         overflow: 'hidden',
-        paddingLeft:
-          column.id === 'mrt-row-expand'
-            ? `${row.depth + 1}rem !important`
-            : undefined,
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
-        whiteSpace: density === 'xs' ? 'nowrap' : 'normal',
         zIndex:
           draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
         '&:hover': {
@@ -239,6 +237,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any> = {}>({
           tableCellProps,
         }),
         ...draggingBorders,
+        padding: "0 1rem !important",
       })}
     >
       <>

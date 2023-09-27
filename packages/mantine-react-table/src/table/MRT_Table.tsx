@@ -152,7 +152,7 @@ export const MRT_Table = <TData extends Record<string, any> = {}>({
       horizontalSpacing={density}
       verticalSpacing={density}
       {...tableProps}
-      style={(theme) => ({
+      sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table',
         tableLayout:
           layoutMode !== 'grid' && enableColumnResizing ? 'fixed' : undefined,
@@ -166,9 +166,9 @@ export const MRT_Table = <TData extends Record<string, any> = {}>({
             theme.colors.gray[theme.colorScheme === 'dark' ? 8 : 3]
           }`,
         },
-        ...(tableProps?.style instanceof Function
-          ? tableProps.style(theme)
-          : (tableProps?.style as any)),
+        ...(tableProps?.sx instanceof Function
+          ? tableProps.sx(theme)
+          : (tableProps?.sx as any)),
       })}
       style={{ ...columnSizeVars, ...tableProps?.style }}
     >

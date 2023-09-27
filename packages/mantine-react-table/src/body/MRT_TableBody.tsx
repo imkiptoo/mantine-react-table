@@ -138,16 +138,16 @@ export const MRT_TableBody = <TData extends Record<string, any> = {}>({
     <Box
       component="tbody"
       {...tableBodyProps}
-      style={(theme) => ({
+      sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
         height: rowVirtualizer
           ? `${rowVirtualizer.getTotalSize()}px`
           : 'inherit',
         minHeight: !rows.length ? '100px' : undefined,
         position: 'relative',
-        ...(tableBodyProps?.style instanceof Function
-          ? tableBodyProps?.style(theme)
-          : (tableBodyProps?.style as any)),
+        ...(tableBodyProps?.sx instanceof Function
+          ? tableBodyProps?.sx(theme)
+          : (tableBodyProps?.sx as any)),
       })}
     >
       {creatingRow && createDisplayMode === 'row' && (
@@ -161,7 +161,7 @@ export const MRT_TableBody = <TData extends Record<string, any> = {}>({
           >
             {renderEmptyRowsFallback?.({ table }) ?? (
               <Text
-                style={{
+                sx={{
                   color: 'gray',
                   fontStyle: 'italic',
                   maxWidth: `min(100vw, ${
@@ -221,3 +221,4 @@ export const Memo_MRT_TableBody = memo(
   MRT_TableBody,
   (prev, next) => prev.table.options.data === next.table.options.data,
 ) as typeof MRT_TableBody;
+

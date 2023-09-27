@@ -49,12 +49,12 @@ export const SetRowHeight = () => (
     columns={columns}
     data={data}
     mantineTableBodyRowProps={{
-      style: {
+      sx: {
         height: '10px',
       },
     }}
     mantineTableBodyCellProps={{
-      style: {
+      sx: {
         padding: '2px 16px',
       },
     }}

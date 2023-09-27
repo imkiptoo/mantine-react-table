@@ -75,7 +75,7 @@ export const MRT_EditActionButtons = <TData extends Record<string, any> = {}>({
   return (
     <Box
       onClick={(e) => e.stopPropagation()}
-      style={{ display: 'flex', gap: '12px' }}
+      sx={{ display: 'flex', gap: '12px' }}
     >
       {variant === 'icon' ? (
         <>

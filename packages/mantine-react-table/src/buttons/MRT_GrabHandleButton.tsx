@@ -31,7 +31,6 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
       <ActionIcon
         draggable="true"
         size="sm"
-        variant="transparent"
         {...actionIconProps}
         onClick={(e) => {
           e.stopPropagation();
@@ -39,7 +38,7 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
         }}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
-        style={(theme) => ({
+        sx={(theme) => ({
           cursor: 'grab',
           margin: '0 -0.16px',
           opacity: 0.5,
@@ -52,9 +51,9 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
           '&:active': {
             cursor: 'grabbing',
           },
-          ...(actionIconProps?.style instanceof Function
-            ? actionIconProps?.style(theme)
-            : (actionIconProps?.style as any)),
+          ...(actionIconProps?.sx instanceof Function
+            ? actionIconProps?.sx(theme)
+            : (actionIconProps?.sx as any)),
         })}
         title={undefined}
       >

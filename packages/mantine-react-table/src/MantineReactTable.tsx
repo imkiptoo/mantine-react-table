@@ -5,6 +5,7 @@ import {
   type MRT_TableInstance,
   type Xor,
 } from './types';
+import "./styles/global.scss";
 
 type TableInstanceProp<TData extends Record<string, any> = {}> = {
   table: MRT_TableInstance<TData>;

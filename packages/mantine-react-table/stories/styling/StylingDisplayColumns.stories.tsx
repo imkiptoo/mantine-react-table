@@ -41,7 +41,7 @@ export const CustomizeDisplayColumns = () => (
     displayColumnDefOptions={{
       'mrt-row-actions': {
         mantineTableHeadCellProps: {
-          style: {
+          sx: {
             fontSize: '20px',
             fontStyle: 'italic',
           },
@@ -56,7 +56,7 @@ export const CustomizeDisplayColumns = () => (
       'mrt-row-numbers': {
         enableColumnOrdering: true,
         mantineTableBodyCellProps: {
-          style: {
+          sx: {
             color: 'red',
             fontSize: '24px',
           },

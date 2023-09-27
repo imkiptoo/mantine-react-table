@@ -1,11 +1,8 @@
 import { type DragEvent, memo, useRef } from 'react';
 import { Box } from '@mantine/core';
-import clsx from 'clsx';
-import {
-  Memo_MRT_TableBodyCell,
-  MRT_TableBodyCell,
-} from './MRT_TableBodyCell';
+import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
+import { getPrimaryColor } from '../column.utils';
 import {
   type MRT_Cell,
   type MRT_Row,
@@ -13,8 +10,6 @@ import {
   type MRT_VirtualItem,
   type MRT_Virtualizer,
 } from '../types';
-
-import classes from './MRT_TableBodyRow.module.css';
 
 interface Props<TData extends Record<string, any> = {}> {
   columnVirtualizer?: MRT_Virtualizer<HTMLDivElement, HTMLTableCellElement>;
@@ -29,7 +24,6 @@ interface Props<TData extends Record<string, any> = {}> {
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
   virtualRow?: MRT_VirtualItem;
-  className?: string | string[];
 }
 
 export const MRT_TableBodyRow = <TData extends Record<string, any> = {}>({
@@ -45,7 +39,6 @@ export const MRT_TableBodyRow = <TData extends Record<string, any> = {}>({
   virtualPaddingLeft,
   virtualPaddingRight,
   virtualRow,
-  className,
 }: Props<TData>) => {
   const {
     getState,
@@ -77,18 +70,9 @@ export const MRT_TableBodyRow = <TData extends Record<string, any> = {}>({
   return (
     <>
       <Box
-        className={clsx(
-          enableHover && classes.MRT_TableBodyRowHover,
-          layoutMode === 'grid'
-            ? classes.MRT_TableBodyRowLayoutGrid
-            : classes.MRT_TableBodyRowLayoutTableRow,
-          virtualRow && classes.MRT_TableBodyRowVirtual,
-          className,
-        )}
         component="tr"
         data-index={virtualRow?.index}
         onDragEnter={handleDragEnter}
-        data-selected={row.getIsSelected()}
         ref={(node: HTMLTableRowElement) => {
           if (node) {
             rowRef.current = node;
@@ -96,16 +80,35 @@ export const MRT_TableBodyRow = <TData extends Record<string, any> = {}>({
           }
         }}
         {...tableRowProps}
-        style={(theme) => ({
+        sx={(theme) => ({
+          boxSizing: 'border-box',
+          display: layoutMode === 'grid' ? 'flex' : 'table-row',
           opacity:
             draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
+          position: virtualRow ? 'absolute' : undefined,
+          top: virtualRow ? 0 : undefined,
+          transition: virtualRow ? 'none' : 'all 100ms ease-in-out',
+          width: '100%',
+          '&:hover td': {
+            backgroundColor:
+              enableHover !== false
+                ? row.getIsSelected()
+                  ? theme.fn.rgba(getPrimaryColor(theme), 0.2)
+                  : theme.colorScheme === 'dark'
+                  ? `${theme.fn.lighten(theme.colors.dark[7], 0.12)}`
+                  : `${theme.fn.darken(theme.white, 0.05)}`
+                : undefined,
+          },
+          ...(tableRowProps?.sx instanceof Function
+            ? tableRowProps.sx(theme)
+            : (tableRowProps?.sx as any)),
+        })}
+        style={{
           transform: virtualRow
             ? `translateY(${virtualRow?.start}px)`
             : undefined,
-          ...(tableRowProps?.style instanceof Function
-            ? tableRowProps.style(theme)
-            : (tableRowProps?.style as any)),
-        })}
+          ...tableRowProps?.style,
+        }}
       >
         {virtualPaddingLeft ? (
           <td style={{ display: 'flex', width: virtualPaddingLeft }} />

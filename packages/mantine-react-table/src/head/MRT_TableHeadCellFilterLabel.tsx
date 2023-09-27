@@ -10,7 +10,6 @@ import {
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 import { getPrimaryColor } from '../column.utils';
-import classes from './MRT_TableHeadCellFilterLabel.module.css';
 
 interface Props<TData extends Record<string, any> = {}> {
   header: MRT_Header<TData>;
@@ -101,17 +100,16 @@ export const MRT_TableHeadCellFilterLabel = <
         }
       >
         {(styles) => (
-          <Box component="span" style={{ ...styles, flex: '0 0' }}>
+          <Box component="span" sx={{ flex: '0 0' }} style={styles}>
             <Popover.Target>
               <Tooltip
                 disabled={popoverOpened}
                 label={filterTooltip}
                 multiline
-                w={filterTooltip.length > 40 ? 300 : undefined}
+                width={filterTooltip.length > 40 ? 300 : undefined}
                 withinPortal
               >
                 <ActionIcon
-                  variant="transparent"
                   color={isFilterActive ? getPrimaryColor(theme) : undefined}
                   onClick={(event: MouseEvent<HTMLButtonElement>) => {
                     event.stopPropagation();
@@ -126,9 +124,12 @@ export const MRT_TableHeadCellFilterLabel = <
                     }, 100);
                   }}
                   size="sm"
-                  className={classes.MRT_TableHeadCellFilterLabelActionIcon}
-                  __vars={{
-                    '--opacity': isFilterActive ? '1' : '0.5',
+                  sx={{
+                    opacity: isFilterActive ? 1 : 0.5,
+                    padding: '2px',
+                    '&:hover': {
+                      opacity: 1,
+                    },
                   }}
                 >
                   <IconFilter />

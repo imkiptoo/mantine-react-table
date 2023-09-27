@@ -1,75 +1,62 @@
-import { Box, rgba } from '@mantine/core';
-import clsx from 'clsx';
-import { MRT_TableHeadCell } from './MRT_TableHeadCell';
+import {Box} from '@mantine/core';
+import {MRT_TableHeadCell} from './MRT_TableHeadCell';
 import {
-  type MRT_Header,
-  type MRT_HeaderGroup,
-  type MRT_TableInstance,
-  type MRT_VirtualItem,
+	type MRT_Header,
+	type MRT_HeaderGroup,
+	type MRT_TableInstance,
+	type MRT_VirtualItem,
 } from '../types';
-import classes from './MRT_TableHeadRow.module.css';
 
 interface Props<TData extends Record<string, any> = {}> {
-  headerGroup: MRT_HeaderGroup<TData>;
-  table: MRT_TableInstance<TData>;
-  virtualColumns?: MRT_VirtualItem[];
-  virtualPaddingLeft?: number;
-  virtualPaddingRight?: number;
+	headerGroup: MRT_HeaderGroup<TData>;
+	table: MRT_TableInstance<TData>;
+	virtualColumns?: MRT_VirtualItem[];
+	virtualPaddingLeft?: number;
+	virtualPaddingRight?: number;
 }
 
-export const MRT_TableHeadRow = <TData extends Record<string, any> = {}>({
-  headerGroup,
-  table,
-  virtualColumns,
-  virtualPaddingLeft,
-  virtualPaddingRight,
-}: Props<TData>) => {
-  const {
-    getState,
-    options: { enableStickyHeader, layoutMode, mantineTableHeadRowProps },
-  } = table;
-  const { isFullScreen } = getState();
+export const MRT_TableHeadRow = <TData extends Record<string, any> = {}>({headerGroup, table, virtualColumns, virtualPaddingLeft, virtualPaddingRight,}: Props<TData>) => {
+	const {
+		getState,
+		options: {enableStickyHeader, layoutMode, mantineTableHeadRowProps},
+	} = table;
+	const {isFullScreen} = getState();
 
-  const { className, ...tableRowProps } =
-    mantineTableHeadRowProps instanceof Function
-      ? mantineTableHeadRowProps({ headerGroup, table })
-      : mantineTableHeadRowProps;
+	const tableRowProps =
+		mantineTableHeadRowProps instanceof Function ? mantineTableHeadRowProps({headerGroup, table}) : mantineTableHeadRowProps;
 
-  const stickyHeader = enableStickyHeader || isFullScreen;
+	const stickyHeader = enableStickyHeader || isFullScreen;
 
-  return (
-    <Box
-      component="tr"
-      {...tableRowProps}
-      className={clsx(
-        classes.MRT_TableHeadRow,
-        stickyHeader && classes.MRT_TableHeadRowSticky,
-        className,
-      )}
-      __vars={{
-        '--display': layoutMode === 'grid' ? 'flex' : 'table-row',
-      }}
-      style={(theme) => ({
-        ...(tableRowProps?.style instanceof Function
-          ? tableRowProps?.style(theme)
-          : (tableRowProps?.style as any)),
-      })}
-    >
-      {virtualPaddingLeft ? (
-        <th style={{ display: 'flex', width: virtualPaddingLeft }} />
-      ) : null}
-      {(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader) => {
-        const header = virtualColumns
-          ? headerGroup.headers[headerOrVirtualHeader.index]
-          : (headerOrVirtualHeader as MRT_Header<TData>);
+	return (
+		<Box
+			component="tr"
+			{...tableRowProps}
+			sx={(theme) => ({
+				backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+				boxShadow: `0 .5px 1px ${theme.fn.rgba(theme.black, 0.1)}`,
+				display: layoutMode === 'grid' ? 'flex' : 'table-row',
+				top: stickyHeader ? 0 : undefined,
+				...(tableRowProps?.sx instanceof Function
+					? tableRowProps?.sx(theme)
+					: (tableRowProps?.sx as any)),
+				position: stickyHeader ? 'sticky' : undefined,
+			})}
+		>
+			{virtualPaddingLeft ? (
+				<th style={{display: 'flex', width: virtualPaddingLeft}}/>
+			) : null}
+			{(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader) => {
+				const header = virtualColumns
+					? headerGroup.headers[headerOrVirtualHeader.index]
+					: (headerOrVirtualHeader as MRT_Header<TData>);
 
-        return (
-          <MRT_TableHeadCell header={header} key={header.id} table={table} />
-        );
-      })}
-      {virtualPaddingRight ? (
-        <th style={{ display: 'flex', width: virtualPaddingRight }} />
-      ) : null}
-    </Box>
-  );
+				return (
+					<MRT_TableHeadCell header={header} key={header.id} table={table}/>
+				);
+			})}
+			{virtualPaddingRight ? (
+				<th style={{display: 'flex', width: virtualPaddingRight,}}/>
+			) : null}
+		</Box>
+	);
 };

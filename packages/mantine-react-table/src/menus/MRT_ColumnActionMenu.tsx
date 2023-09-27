@@ -1,7 +1,6 @@
 import { ActionIcon, Menu, Tooltip } from '@mantine/core';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
-
-import classes from './MRT_ColumnActionMenu.module.css';
+import {IconChevronDown} from "@tabler/icons-react";
 
 interface Props<TData extends Record<string, any> = {}> {
   header: MRT_Header<TData>;
@@ -30,7 +29,6 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
         IconBoxMultiple,
         IconClearAll,
         IconColumns,
-        IconDotsVertical,
         IconEyeOff,
         IconFilter,
         IconFilterOff,
@@ -119,7 +117,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
           {enableSortingRemoval !== false && (
             <Menu.Item
               disabled={!column.getIsSorted()}
-              leftSection={<IconClearAll />}
+              icon={<IconClearAll />}
               onClick={handleClearSort}
             >
               {localization.clearSort}
@@ -127,7 +125,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
           )}
           <Menu.Item
             disabled={column.getIsSorted() === 'asc'}
-            leftSection={<IconSortAscending />}
+            icon={<IconSortAscending />}
             onClick={handleSortAsc}
           >
             {localization.sortByColumnAsc?.replace(
@@ -136,7 +134,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
             )}
           </Menu.Item>
           <Menu.Item
-            leftSection={<IconSortDescending />}
+            icon={<IconSortDescending />}
             disabled={column.getIsSorted() === 'desc'}
             onClick={handleSortDesc}
           >
@@ -156,15 +154,12 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
           <>
             <Menu.Item
               disabled={!column.getFilterValue()}
-              leftSection={<IconFilterOff />}
+              icon={<IconFilterOff />}
               onClick={handleClearFilter}
             >
               {localization.clearFilter}
             </Menu.Item>
-            <Menu.Item
-              leftSection={<IconFilter />}
-              onClick={handleFilterByColumn}
-            >
+            <Menu.Item icon={<IconFilter />} onClick={handleFilterByColumn}>
               {localization.filterByColumn?.replace(
                 '{column}',
                 String(columnDef.header),
@@ -175,10 +170,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
         )}
       {enableGrouping && column.getCanGroup() && (
         <>
-          <Menu.Item
-            leftSection={<IconBoxMultiple />}
-            onClick={handleGroupByColumn}
-          >
+          <Menu.Item icon={<IconBoxMultiple />} onClick={handleGroupByColumn}>
             {localization[
               column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
             ]?.replace('{column}', String(columnDef.header))}
@@ -190,21 +182,21 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
         <>
           <Menu.Item
             disabled={column.getIsPinned() === 'left' || !column.getCanPin()}
-            leftSection={<IconPinned style={{ transform: 'rotate(90deg)' }} />}
+            icon={<IconPinned style={{ transform: 'rotate(90deg)' }} />}
             onClick={() => handlePinColumn('left')}
           >
             {localization.pinToLeft}
           </Menu.Item>
           <Menu.Item
             disabled={column.getIsPinned() === 'right' || !column.getCanPin()}
-            leftSection={<IconPinned style={{ transform: 'rotate(-90deg)' }} />}
+            icon={<IconPinned style={{ transform: 'rotate(-90deg)' }} />}
             onClick={() => handlePinColumn('right')}
           >
             {localization.pinToRight}
           </Menu.Item>
           <Menu.Item
             disabled={!column.getIsPinned()}
-            leftSection={<IconPinnedOff />}
+            icon={<IconPinnedOff />}
             onClick={() => handlePinColumn(false)}
           >
             {localization.unpin}
@@ -215,7 +207,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
       {enableColumnResizing && column.getCanResize() && (
         <Menu.Item
           disabled={!columnSizing[column.id]}
-          leftSection={<IconArrowAutofitContent />}
+          icon={<IconArrowAutofitContent />}
           key={0}
           onClick={handleResetColumnSize}
         >
@@ -226,7 +218,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
         <>
           <Menu.Item
             disabled={!column.getCanHide()}
-            leftSection={<IconEyeOff />}
+            icon={<IconEyeOff />}
             key={0}
             onClick={handleHideColumn}
           >
@@ -240,7 +232,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
               !Object.values(columnVisibility).filter((visible) => !visible)
                 .length
             }
-            leftSection={<IconColumns />}
+            icon={<IconColumns />}
             key={1}
             onClick={handleShowAllColumns}
           >
@@ -255,21 +247,51 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
   );
 
   return (
-    <Menu closeOnItemClick withinPortal position="bottom-start">
+    <Menu closeOnItemClick withinPortal position="bottom-start" styles={{
+      item: {
+        height: "2rem",
+        padding: ".5rem .75rem .5rem .25rem",
+        fontSize: "0.875rem",
+      },
+      itemIcon: {
+        height: "1.125rem",
+        width: "1.125rem",
+        marginRight: ".5rem",
+        opacity: 0.75
+      },
+      label: {
+
+      },
+      dropdown: {
+        boxShadow: "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px",
+        padding: 0,
+        borderColor: "rgb(229, 229, 229)",
+        borderRadius: "6px",
+      }
+    }}>
       <Tooltip
         withinPortal
-        openDelay={1000}
+        openDelay={0}
+        disabled={true}
         label={actionIconProps?.title ?? localization.columnActions}
       >
         <Menu.Target>
           <ActionIcon
-            className={classes.action}
             aria-label={localization.columnActions}
-            size="xs"
-            variant="transparent"
+            size="sm"
             {...actionIconProps}
+            sx={(theme) => ({
+              opacity: 0.5,
+              transition: 'opacity 100ms',
+              '&:hover': {
+                opacity: 1,
+              },
+              ...(actionIconProps?.sx instanceof Function
+                ? actionIconProps.sx(theme)
+                : (actionIconProps?.sx as any)),
+            })}
           >
-            <IconDotsVertical />
+            <IconChevronDown />
           </ActionIcon>
         </Menu.Target>
       </Tooltip>

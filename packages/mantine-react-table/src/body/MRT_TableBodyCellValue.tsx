@@ -76,7 +76,7 @@ export const MRT_TableBodyCellValue = <TData extends Record<string, any> = {}>({
 
     renderedCellValue = (
       <Highlight
-        color="yellow.3"
+        highlightColor="yellow.3"
         highlight={highlight}
         {...highlightProps}
       >

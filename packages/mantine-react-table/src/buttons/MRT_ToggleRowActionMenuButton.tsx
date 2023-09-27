@@ -3,7 +3,6 @@ import { ActionIcon, Tooltip } from '@mantine/core';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
-import classes from './MRT_ToggleRowActionMenuButton.module.css';
 
 interface Props<TData extends Record<string, any> = {}> {
   cell: MRT_Cell<TData>;
@@ -61,7 +60,16 @@ export const MRT_ToggleRowActionMenuButton = <
             aria-label={localization.edit}
             disabled={!!editingRow && editingRow.id !== row.id}
             onClick={handleStartEditMode}
-            className={classes.MRT_ToggleRowActionMenuButton}
+            sx={{
+              opacity: 0.8,
+              '&:hover': {
+                opacity: 1,
+              },
+              '&:disabled': {
+                backgroundColor: 'transparent',
+                border: 'none',
+              },
+            }}
           >
             <IconEdit />
           </ActionIcon>

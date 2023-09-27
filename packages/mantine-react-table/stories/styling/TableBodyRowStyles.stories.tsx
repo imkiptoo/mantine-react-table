@@ -52,7 +52,7 @@ export const StyleMantineTableBodyRow = () => (
     columns={columns}
     data={data}
     mantineTableBodyRowProps={{
-      style: {
+      sx: {
         backgroundColor: 'rgba(52, 210, 235, 0.1)',
         borderRight: '1px solid rgba(224,224,224,1)',
       },
@@ -65,13 +65,13 @@ export const StyleCustomStripedRows = () => (
     columns={columns}
     data={data}
     mantineTableBodyProps={{
-      style: () => ({
+      sx: () => ({
         '& tr:nth-of-type(odd)': {
           backgroundColor: 'limegreen',
         },
       }),
     }}
-    mantineTableBodyCellProps={{ style: { border: 'none' } }}
+    mantineTableBodyCellProps={{ sx: { border: 'none' } }}
   />
 );
 
@@ -80,13 +80,13 @@ export const StyleCustomStripedRowsDetailPanel = () => (
     columns={columns}
     data={data}
     mantineTableBodyProps={{
-      style: () => ({
+      sx: () => ({
         '& tr:nth-child(4n+3)': {
           backgroundColor: 'limegreen',
         },
       }),
     }}
-    mantineTableBodyCellProps={{ style: { border: 'none' } }}
+    mantineTableBodyCellProps={{ sx: { border: 'none' } }}
     renderDetailPanel={() => <div>Detail Panel</div>}
   />
 );
@@ -96,7 +96,7 @@ export const ConditionallyStyleMantineTableRow = () => (
     columns={columns}
     data={data}
     mantineTableBodyRowProps={({ row }) => ({
-      style: {
+      sx: {
         backgroundColor:
           row.getValue<number>('age') > 50 ? 'rgba(255, 54, 33, 0.18)' : '',
         fontStyle: 'italic',

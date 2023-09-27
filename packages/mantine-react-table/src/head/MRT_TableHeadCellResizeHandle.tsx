@@ -1,7 +1,6 @@
 import { Box, Divider } from '@mantine/core';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 import { getPrimaryColor } from '../column.utils';
-import classes from './MRT_TableHeadCellResizeHandle.module.css';
 
 interface Props<TData extends Record<string, any> = {}> {
   header: MRT_Header<TData>;
@@ -33,15 +32,20 @@ export const MRT_TableHeadCellResizeHandle = <
       }}
       onMouseDown={header.getResizeHandler()}
       onTouchStart={header.getResizeHandler()}
-      className={classes.MRT_TableHeadCellResizeHandle}
-      __vars={{
-        '--margin-right':
-          density === 'xl'
-            ? 'rem(-24px)'
-            : density === 'md'
-            ? 'rem(-20px)'
-            : 'rem(-14px)',
-        '--transform':
+      sx={(theme) => ({
+        cursor: 'col-resize',
+        marginRight:
+          density === 'xl' ? '-24px' : density === 'md' ? '-20px' : '-14px',
+        position: 'absolute',
+        right: '4px',
+        paddingLeft: '1px',
+        paddingRight: '1px',
+        '&:active > .mantine-Divider-vertical': {
+          borderLeftColor: getPrimaryColor(theme),
+        },
+      })}
+      style={{
+        transform:
           column.getIsResizing() && columnResizeMode === 'onEnd'
             ? `translateX(${getState().columnSizingInfo.deltaOffset ?? 0}px)`
             : undefined,
@@ -50,11 +54,16 @@ export const MRT_TableHeadCellResizeHandle = <
       <Divider
         orientation="vertical"
         size="lg"
-        className={classes.MRT_TableHeadCellResizeHandleDivider}
-        __vars={{
-          '--transition': column.getIsResizing()
+        sx={{
+          borderRadius: '2px',
+          borderWidth: '4px',
+          height: '24px',
+          touchAction: 'none',
+          transition: column.getIsResizing()
             ? undefined
             : 'all 100ms ease-in-out',
+          userSelect: 'none',
+          zIndex: 4,
         }}
       />
     </Box>

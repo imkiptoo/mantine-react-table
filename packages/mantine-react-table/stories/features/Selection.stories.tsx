@@ -59,7 +59,7 @@ export const SelectionEnabledWithRowClick = () => (
     enableRowSelection
     mantineTableBodyRowProps={({ row }) => ({
       onClick: row.getToggleSelectedHandler(),
-      style: {
+      sx: {
         cursor: 'pointer',
       },
     })}
@@ -82,7 +82,7 @@ export const ManualSelection = () => {
             [row.id]: !prev[row.id],
           })),
         selected: rowSelection[row.id],
-        style: {
+        sx: {
           cursor: 'pointer',
         },
       })}
@@ -147,7 +147,7 @@ export const SingleSelectionRadioWithRowClick = () => (
     enableMultiRowSelection={false}
     mantineTableBodyRowProps={({ row }) => ({
       onClick: row.getToggleSelectedHandler(),
-      style: {
+      sx: {
         cursor: 'pointer',
       },
     })}
@@ -205,10 +205,10 @@ export const CustomAlertBannerHeadOverlay = () => (
           <MRT_SelectCheckbox selectAll table={table} /> {selectedAlert}{' '}
         </Flex>
         <Flex gap="md">
-          <Button leftSection={<IconSend />} color="blue">
+          <Button leftIcon={<IconSend />} color="blue">
             Email Selected
           </Button>
-          <Button leftSection={<IconTrash />} color="red">
+          <Button leftIcon={<IconTrash />} color="red">
             Remove Selected
           </Button>
         </Flex>

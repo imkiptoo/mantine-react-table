@@ -224,12 +224,12 @@ export const ColumnResizingLayoutGridNoFlexGrow = () => (
     enableRowSelection
     enableColumnResizing
     mantineTableHeadCellProps={{
-      style: {
+      sx: {
         flex: '0 0 auto',
       },
     }}
     mantineTableBodyCellProps={{
-      style: {
+      sx: {
         flex: '0 0 auto',
       },
     }}

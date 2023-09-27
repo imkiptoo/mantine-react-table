@@ -1,8 +1,6 @@
 import { Box } from '@mantine/core';
-import clsx from 'clsx';
 import { getCommonCellStyles } from '../column.utils';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
-import classes from './MRT_TableFooterCell.module.css';
 
 interface Props<TData extends Record<string, any> = {}> {
   footer: MRT_Header<TData>;
@@ -30,7 +28,7 @@ export const MRT_TableFooterCell = <TData extends Record<string, any> = {}>({
       ? columnDef.mantineTableFooterCellProps({ column, table })
       : columnDef.mantineTableFooterCellProps;
 
-  const { className, ...tableCellProps } = {
+  const tableCellProps = {
     ...mTableFooterCellProps,
     ...mcTableFooterCellProps,
   };
@@ -41,15 +39,12 @@ export const MRT_TableFooterCell = <TData extends Record<string, any> = {}>({
       align={columnDefType === 'group' ? 'center' : 'left'}
       colSpan={footer.colSpan}
       {...tableCellProps}
-      className={clsx(
-        classes.MRT_TableFooterCell,
-        layoutMode === 'grid'
-          ? classes.MRT_TableFooterCellGrid
-          : classes.MRT_TableFooterCellTableCell,
-        columnDefType === 'group' && classes.MRT_TableFooterCellCenterColumn,
-        className,
-      )}
-      style={(theme) => ({
+      sx={(theme) => ({
+        display: layoutMode === 'grid' ? 'grid' : 'table-cell',
+        fontWeight: 'bold',
+        justifyContent: columnDefType === 'group' ? 'center' : undefined,
+        padding: '8px',
+        verticalAlign: 'top',
         zIndex: column.getIsPinned() && columnDefType !== 'group' ? 2 : 1,
         ...getCommonCellStyles({
           column,

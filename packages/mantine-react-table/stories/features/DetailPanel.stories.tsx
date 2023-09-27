@@ -1,5 +1,5 @@
 import { type Meta } from '@storybook/react';
-import { MantineReactTable, MRT_TableOptions } from '../../src';
+import { MantineReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
@@ -75,7 +75,7 @@ export const DetailPanelEnabledConditional = () => (
       phone: faker.phone.number(),
     }))}
     mantineExpandButtonProps={({ row }) => ({
-      style: {
+      sx: {
         display: row.original.age > 50 ? 'flex' : 'none',
       },
     })}

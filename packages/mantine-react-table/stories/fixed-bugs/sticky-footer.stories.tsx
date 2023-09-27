@@ -1,5 +1,5 @@
 import { type Meta } from '@storybook/react';
-import { MantineReactTable, MRT_TableOptions } from '../../src';
+import { MantineReactTable } from '../../src';
 
 const meta: Meta = {
   title: 'Fixed Bugs/sticky-footer',
@@ -138,15 +138,15 @@ export const PinnedColumnsWithStickyFooter = () => {
       enableStickyHeader
       enableStickyFooter
       mantineTableContainerProps={{
-        style: { maxHeight: 300 },
+        sx: { maxHeight: 300 },
       }}
       mantineTableHeadCellProps={{
         align: 'center',
-        style: { borderLeft: '1px solid black' },
+        sx: { borderLeft: '1px solid black' },
       }}
       mantineTableBodyCellProps={{
         align: 'center',
-        style: { borderLeft: '1px solid black' },
+        sx: { borderLeft: '1px solid black' },
       }}
       initialState={{ columnPinning: { left: ['no', 'name', 'firstName'] } }}
     />

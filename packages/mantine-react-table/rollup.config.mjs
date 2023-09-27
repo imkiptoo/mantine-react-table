@@ -2,12 +2,10 @@ import dts from 'rollup-plugin-dts';
 import external from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import postcss from 'rollup-plugin-postcss';
-import {babel} from '@rollup/plugin-babel';
+import { babel } from '@rollup/plugin-babel';
 
 export default [
   {
-    preserveModules: true,
     external: [
       '@mantine/core',
       '@mantine/dates',
@@ -42,7 +40,6 @@ export default [
       typescript({
         rootDir: './src',
       }),
-      postcss({ extract: 'mrt.css' }),
     ],
   },
   {

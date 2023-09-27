@@ -8,13 +8,7 @@ import {
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
 import { type MRT_SortingFns } from './sortingFns';
-import {
-  rgba,
-  type BoxProps,
-  type MantineTheme,
-  darken,
-  lighten,
-} from '@mantine/core';
+import { type BoxProps, type MantineTheme } from '@mantine/core';
 import {
   type MRT_TableOptions,
   type MantineShade,
@@ -287,7 +281,7 @@ export const getCanRankRows = <TData extends Record<string, any> = {}>(
     !Object.values(expanded).some(Boolean)
   );
 };
-// TODO: this needs to be refactored out to use CSS classes/styles
+
 export const getCommonCellStyles = <TData extends Record<string, any> = {}>({
   column,
   header,
@@ -317,25 +311,25 @@ export const getCommonCellStyles = <TData extends Record<string, any> = {}>({
   return {
     backgroundColor: row
       ? row?.getIsSelected()
-        ? rgba(getPrimaryColor(theme), 0.1)
+        ? theme.fn.rgba(getPrimaryColor(theme), 0.1)
         : column.getIsPinned() && column.columnDef.columnDefType !== 'group'
-        ? rgba(
+        ? theme.fn.rgba(
             theme.colorScheme === 'dark'
-              ? darken(theme.colors.dark[7], 0.02)
+              ? theme.fn.darken(theme.colors.dark[7], 0.02)
               : theme.white,
             0.97,
           )
         : isStriped
         ? 'inherit'
         : theme.colorScheme === 'dark'
-        ? lighten(theme.colors.dark[7], 0.02)
+        ? theme.fn.lighten(theme.colors.dark[7], 0.02)
         : theme.white
       : 'inherit',
     backgroundClip: 'padding-box',
     boxShadow: getIsLastLeftPinnedColumn(table, column)
-      ? `-4px 0 8px -6px ${rgba(theme.black, 0.2)} inset`
+      ? `-4px 0 8px -6px ${theme.fn.rgba(theme.black, 0.2)} inset`
       : getIsFirstRightPinnedColumn(column)
-      ? `4px 0 8px -6px ${rgba(theme.black, 0.2)} inset`
+      ? `4px 0 8px -6px ${theme.fn.rgba(theme.black, 0.2)} inset`
       : undefined,
     display: table.options.layoutMode === 'grid' ? 'flex' : 'table-cell',
     flex:
@@ -384,9 +378,9 @@ export const getCommonCellStyles = <TData extends Record<string, any> = {}>({
       ? 'none'
       : `padding 100ms ease-in-out`,
     ...(!table.options.enableColumnResizing && widthStyles), //let devs pass in width styles if column resizing is disabled
-    ...(tableCellProps?.style instanceof Function
-      ? tableCellProps.style(theme)
-      : (tableCellProps?.style as any)),
+    ...(tableCellProps?.sx instanceof Function
+      ? tableCellProps.sx(theme)
+      : (tableCellProps?.sx as any)),
     ...(table.options.enableColumnResizing && widthStyles), //do not let devs pass in width styles if column resizing is enabled
   };
 };

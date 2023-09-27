@@ -38,13 +38,16 @@ export const MRT_TableHeadCellFilterContainer = <
   const showChangeModeButton =
     enableColumnFilterModes &&
     columnDef.enableColumnFilterModes !== false &&
-    (allowedColumnFilterOptions === undefined ||
-      !!allowedColumnFilterOptions?.length);
+    (allowedColumnFilterOptions === undefined || !!allowedColumnFilterOptions?.length);
 
   return (
     <Collapse in={showColumnFilters || columnFilterDisplayMode === 'popover'}>
-      <Flex direction="column">
-        <Flex align="flex-end">
+      <Flex direction="column" sx={{
+
+      }}>
+        <Flex align="flex-end" sx={{
+          height: "2rem",
+        }}>
           {columnDef.filterVariant === 'checkbox' ? (
             <MRT_FilterCheckbox column={column} table={table} />
           ) : columnDef.filterVariant === 'range-slider' ? (
@@ -66,10 +69,9 @@ export const MRT_TableHeadCellFilterContainer = <
               >
                 <Menu.Target>
                   <ActionIcon
-                    variant="transparent"
                     aria-label={localization.changeFilterMode}
                     size="md"
-                    style={{ transform: 'translateY(-2px)' }}
+                    sx={{ transform: 'translateY(-2px)' }}
                   >
                     <IconFilterCog />
                   </ActionIcon>
@@ -81,7 +83,7 @@ export const MRT_TableHeadCellFilterContainer = <
                 onSelect={() =>
                   setTimeout(
                     () => filterInputRefs.current[`${column.id}-0`]?.focus(),
-                    100,
+                    0,
                   )
                 }
               />
@@ -92,7 +94,7 @@ export const MRT_TableHeadCellFilterContainer = <
           <Text
             component="label"
             color="dimmed"
-            style={{ whiteSpace: 'nowrap', marginTop: '4px', fontSize: '10px' }}
+            sx={{ whiteSpace: 'nowrap', marginTop: '4px', fontSize: '10px' }}
           >
             {localization.filterMode.replace(
               '{filterType}',

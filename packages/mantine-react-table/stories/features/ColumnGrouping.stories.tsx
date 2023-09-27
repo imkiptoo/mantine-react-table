@@ -219,7 +219,7 @@ export const ColumnGroupingDropZoneAlwaysVisible = () => {
           : undefined
       }
       mantineTopToolbarProps={{
-        style: {
+        sx: {
           '& .Mantine-ToolbarDropZone': {
             border: '1px solid red',
           },

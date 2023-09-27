@@ -22,7 +22,24 @@ export const MRT_ShowHideColumnsButton = <
   } = table;
 
   return (
-    <Menu closeOnItemClick={false} withinPortal>
+    <Menu styles={{
+      item: {
+        height: "2rem",
+        padding: ".5rem .75rem .5rem .25rem",
+        fontSize: "0.875rem",
+        alignSelf: 'center',
+        marginTop: ".25rem"
+      },
+      itemLabel: {
+
+      },
+      dropdown: {
+        boxShadow: "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px",
+        padding: 0,
+        borderColor: "rgb(229, 229, 229)",
+        borderRadius: "6px",
+      }
+    }} closeOnItemClick={false} withinPortal>
       <Tooltip withinPortal label={rest?.title ?? localization.showHideColumns}>
         <Menu.Target>
           <ActionIcon
