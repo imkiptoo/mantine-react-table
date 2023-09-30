@@ -98,7 +98,7 @@ export const MRT_ShowHideColumnsMenuItems = <
             : hoveredColumn?.id === column.id
             ? `2px dashed ${getPrimaryColor(theme)}`
             : 'none',
-          paddingLeft: `${(column.depth + 0.5) * 2}rem`,
+          paddingLeft: `6px`,
           paddingTop: '6px',
           paddingBottom: '6px',
         })}
@@ -107,8 +107,9 @@ export const MRT_ShowHideColumnsMenuItems = <
           sx={{
             display: 'flex',
             flexWrap: 'nowrap',
-            gap: '8px',
+            gap: '4px',
             alignItems: 'center',
+            justifyContent: "flex-start",
           }}
         >
           {!isSubMenu &&
@@ -124,14 +125,14 @@ export const MRT_ShowHideColumnsMenuItems = <
                 table={table}
               />
             ) : (
-              <Box sx={{ width: '22px' }} />
+              <Box sx={{ width: '0px' }} />
             ))}
           {!isSubMenu &&
             enablePinning &&
             (column.getCanPin() ? (
               <MRT_ColumnPinningButtons column={column} table={table} />
             ) : (
-              <Box sx={{ width: '70px' }} />
+              <Box sx={{ width: '0px' }} />
             ))}
           {enableHiding ? (
             <Tooltip

@@ -9,9 +9,7 @@ interface Props<TData extends Record<string, any> = {}>
 
 export const MRT_ToggleGlobalFilterButton = <
 	TData extends Record<string, any> = {},
->({
-	  table,
-	  ...rest
+>({table, ...rest
   }: Props<TData>) => {
 	const {
 		getState,
@@ -36,11 +34,12 @@ export const MRT_ToggleGlobalFilterButton = <
 				aria-label={rest?.title ?? localization.showHideSearch}
 				disabled={!!globalFilter}
 				onClick={handleToggleSearch}
-				size="lg"
+				size="md"
 				{...rest}
 				title={undefined}
+				variant={"default"}
 			>
-				{showGlobalFilter ? <IconSearchOff/> : <IconSearch/>}
+				{showGlobalFilter ? <IconSearchOff size={"1rem"}/> : <IconSearch size={"1rem"}/>}
 			</ActionIcon>
 		</Tooltip>
 	);

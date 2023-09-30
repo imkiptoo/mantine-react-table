@@ -1,6 +1,7 @@
 import {ActionIcon, Indicator, Tooltip, useMantineTheme} from '@mantine/core';
 import {type MRT_Header, type MRT_TableInstance} from '../types';
 import {getPrimaryColor} from '../column.utils';
+import {Icon} from "@iconify/react";
 
 interface Props<TData extends Record<string, any> = {}> {
     header: MRT_Header<TData>;
@@ -16,7 +17,7 @@ export const MRT_TableHeadCellSortLabel = <
     const {
         getState,
         options: {
-            icons: {IconSortDescending, IconSortAscending, IconArrowsSort},
+            icons: {IconArrowsSort},
             localization,
         },
     } = table;
@@ -69,9 +70,9 @@ export const MRT_TableHeadCellSortLabel = <
                     }}
                 >
                     {column.getIsSorted() === 'desc' ? (
-                        <IconSortDescending/>
+                        <Icon icon="fluent:text-sort-descending-20-filled" height={24} />
                     ) : column.getIsSorted() === 'asc' ? (
-                        <IconSortAscending/>
+                        <Icon icon="fluent:text-sort-ascending-20-filled" height={24} />
                     ) : (
                         <IconArrowsSort/>
                     )}

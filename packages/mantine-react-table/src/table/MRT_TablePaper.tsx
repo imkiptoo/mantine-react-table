@@ -31,8 +31,6 @@ export const MRT_TablePaper = <TData extends Record<string, any> = {}>({
 
   return (
     <Paper
-      shadow="xs"
-      withBorder
       {...tablePaperProps}
       ref={(ref: HTMLDivElement) => {
         tablePaperRef.current = ref;

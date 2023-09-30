@@ -75,7 +75,7 @@ export const MRT_Localization_EN: MRT_Localization = {
   select: 'Select',
   showAll: 'Show all',
   showAllColumns: 'Show all columns',
-  showHideColumns: 'Show/Hide columns',
+  showHideColumns: 'Columns',
   showHideFilters: 'Show/Hide filters',
   showHideSearch: 'Show/Hide search',
   sortByColumnAsc: 'Sort Ascending',

@@ -74,11 +74,11 @@ export const MRT_TopToolbar = <TData extends Record<string, any> = {}>({table,}:
 				...(toolbarProps?.sx instanceof Function
 					? toolbarProps.sx(theme)
 					: (toolbarProps?.sx as any)),
-				alignItems: "center"
+				alignItems: "center",
+				borderBottom: `1px solid ${theme.colors.gray[theme.colorScheme === 'dark' ? 8 : 4]}`,
 			})}
 			style={{
 				alignItems: 'center',
-				borderBottom: '1px solid rgba(224,224,224,1)',
 			}}
 		>
 			{positionToolbarAlertBanner === 'top' && (
@@ -99,7 +99,8 @@ export const MRT_TopToolbar = <TData extends Record<string, any> = {}>({table,}:
 					right: 0,
 					top: 0,
 					width: '100%',
-					minHeight: "100%",
+					minHeight: "2.5rem",
+					padding: "0 1rem",
 				}}
 			>
 				{enableGlobalFilter && positionGlobalFilter === 'left' && (

@@ -99,7 +99,7 @@ export const MRT_ShowHideColumnsMenu = <
             <Flex
                 sx={{
                     justifyContent: isSubMenu ? 'center' : 'space-between',
-                    padding: '4px',
+                    paddingBottom: '4px',
                     gap: '4px',
                 }}
             >
@@ -109,7 +109,7 @@ export const MRT_ShowHideColumnsMenu = <
                         onClick={hideAllColumns}
                         styles={{
                             root: {
-                                height: "2rem",
+                                height: "1.75rem",
                             }
                         }}
                         variant="subtle"
@@ -126,7 +126,7 @@ export const MRT_ShowHideColumnsMenu = <
                         }
                         styles={{
                             root: {
-                                height: "2rem",
+                                height: "1.75rem",
                             }
                         }}
                         variant="subtle"
@@ -139,7 +139,7 @@ export const MRT_ShowHideColumnsMenu = <
                         disabled={!getIsSomeColumnsPinned()}
                         styles={{
                             root: {
-                                height: "2rem",
+                                height: "1.75rem",
                             }
                         }}
                         onClick={() => table.resetColumnPinning(true)}
@@ -152,7 +152,7 @@ export const MRT_ShowHideColumnsMenu = <
                     <Button
                         styles={{
                             root: {
-                                height: "2rem",
+                                height: "1.75rem",
                             }
                         }}
                         disabled={getIsAllColumnsVisible()}

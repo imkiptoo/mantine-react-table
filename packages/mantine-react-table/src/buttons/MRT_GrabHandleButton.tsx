@@ -1,6 +1,7 @@
 import { type DragEventHandler } from 'react';
 import { ActionIcon, type ActionIconProps, Tooltip } from '@mantine/core';
 import { type HTMLPropsRef, type MRT_TableInstance } from '../types';
+import {Icon} from "@iconify/react";
 
 interface Props<TData extends Record<string, any> = {}> {
   actionIconProps?: ActionIconProps & HTMLPropsRef<HTMLButtonElement>;
@@ -17,7 +18,6 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
 }: Props<TData>) => {
   const {
     options: {
-      icons: { IconGripHorizontal },
       localization,
     },
   } = table;
@@ -40,9 +40,8 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
         onDragEnd={onDragEnd}
         sx={(theme) => ({
           cursor: 'grab',
-          margin: '0 -0.16px',
-          opacity: 0.5,
-          padding: '2px',
+          opacity: 0.75,
+          padding: '1px',
           transition: 'opacity 100ms ease-in-out',
           '&:hover': {
             backgroundColor: 'transparent',
@@ -57,7 +56,7 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
         })}
         title={undefined}
       >
-        <IconGripHorizontal />
+        <Icon icon="fluent:re-order-dots-vertical-24-regular" height={24} />
       </ActionIcon>
     </Tooltip>
   );

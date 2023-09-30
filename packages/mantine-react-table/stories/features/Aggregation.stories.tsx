@@ -46,7 +46,7 @@ const columns = [
       <>
         Max by{' '}
         {table.getColumn(cell.row.groupingColumnId ?? '').columnDef.header}:{' '}
-        <Box sx={{ color: 'green', fontWeight: 'bold' }}>
+        <Box style={{ color: 'green', fontWeight: 'bold' }}>
           {cell.getValue<number>()}
         </Box>
       </>

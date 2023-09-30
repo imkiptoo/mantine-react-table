@@ -1,7 +1,6 @@
 import {Flex} from '@mantine/core';
 import {
 	MRT_ToggleFiltersButton,
-	MRT_ToggleGlobalFilterButton
 } from '../buttons';
 import {type MRT_TableInstance} from '../types';
 
@@ -17,8 +16,6 @@ export const MRT_ToolbarFilterButtons = <
 			columnFilterDisplayMode,
 			enableColumnFilters,
 			enableFilters,
-			enableGlobalFilter,
-			initialState,
 			renderToolbarInternalActions,
 		},
 	} = table;
@@ -27,8 +24,9 @@ export const MRT_ToolbarFilterButtons = <
 		<Flex
 			sx={{
 				alignItems: 'center',
-				gap: '2px',
+				gap: '6px',
 				zIndex: 3,
+				paddingRight: "6px",
 			}}
 		>
 			{renderToolbarInternalActions?.({
@@ -40,11 +38,11 @@ export const MRT_ToolbarFilterButtons = <
 						columnFilterDisplayMode !== 'popover' && (
 							<MRT_ToggleFiltersButton table={table}/>
 						)}
-					{enableFilters &&
+					{/*{enableFilters &&
 						enableGlobalFilter &&
 						!initialState?.showGlobalFilter && (
 							<MRT_ToggleGlobalFilterButton table={table}/>
-						)}
+						)}*/}
 				</>
 			)}
 		</Flex>

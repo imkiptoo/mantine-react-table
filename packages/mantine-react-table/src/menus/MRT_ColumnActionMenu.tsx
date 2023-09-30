@@ -1,6 +1,6 @@
 import { ActionIcon, Menu, Tooltip } from '@mantine/core';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
-import {IconChevronDown} from "@tabler/icons-react";
+import {Icon} from "@iconify/react";
 
 interface Props<TData extends Record<string, any> = {}> {
   header: MRT_Header<TData>;
@@ -24,19 +24,6 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
       enablePinning,
       enableSorting,
       enableSortingRemoval,
-      icons: {
-        IconArrowAutofitContent,
-        IconBoxMultiple,
-        IconClearAll,
-        IconColumns,
-        IconEyeOff,
-        IconFilter,
-        IconFilterOff,
-        IconPinned,
-        IconPinnedOff,
-        IconSortAscending,
-        IconSortDescending,
-      },
       localization,
       mantineColumnActionsButtonProps,
       renderColumnActionsMenuItems,
@@ -117,7 +104,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
           {enableSortingRemoval !== false && (
             <Menu.Item
               disabled={!column.getIsSorted()}
-              icon={<IconClearAll />}
+              icon={<Icon icon="fluent:number-symbol-dismiss-24-regular" height={24} />}
               onClick={handleClearSort}
             >
               {localization.clearSort}
@@ -125,7 +112,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
           )}
           <Menu.Item
             disabled={column.getIsSorted() === 'asc'}
-            icon={<IconSortAscending />}
+            icon={<Icon icon="fluent:text-sort-ascending-24-regular" height={24} />}
             onClick={handleSortAsc}
           >
             {localization.sortByColumnAsc?.replace(
@@ -134,7 +121,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
             )}
           </Menu.Item>
           <Menu.Item
-            icon={<IconSortDescending />}
+            icon={<Icon icon="fluent:text-sort-descending-24-regular" height={24} />}
             disabled={column.getIsSorted() === 'desc'}
             onClick={handleSortDesc}
           >
@@ -154,12 +141,12 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
           <>
             <Menu.Item
               disabled={!column.getFilterValue()}
-              icon={<IconFilterOff />}
+              icon={<Icon icon="fluent:filter-dismiss-24-regular" height={24} />}
               onClick={handleClearFilter}
             >
               {localization.clearFilter}
             </Menu.Item>
-            <Menu.Item icon={<IconFilter />} onClick={handleFilterByColumn}>
+            <Menu.Item icon={<Icon icon="fluent:filter-24-regular" height={24} />} onClick={handleFilterByColumn}>
               {localization.filterByColumn?.replace(
                 '{column}',
                 String(columnDef.header),
@@ -170,7 +157,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
         )}
       {enableGrouping && column.getCanGroup() && (
         <>
-          <Menu.Item icon={<IconBoxMultiple />} onClick={handleGroupByColumn}>
+          <Menu.Item icon={<Icon icon="fluent:group-24-regular" height={24} />} onClick={handleGroupByColumn}>
             {localization[
               column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
             ]?.replace('{column}', String(columnDef.header))}
@@ -182,21 +169,21 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
         <>
           <Menu.Item
             disabled={column.getIsPinned() === 'left' || !column.getCanPin()}
-            icon={<IconPinned style={{ transform: 'rotate(90deg)' }} />}
+            icon={<Icon icon="fluent:panel-left-contract-24-regular" height={24} />}
             onClick={() => handlePinColumn('left')}
           >
             {localization.pinToLeft}
           </Menu.Item>
           <Menu.Item
             disabled={column.getIsPinned() === 'right' || !column.getCanPin()}
-            icon={<IconPinned style={{ transform: 'rotate(-90deg)' }} />}
+            icon={<Icon icon="fluent:panel-left-expand-24-regular" height={24} />}
             onClick={() => handlePinColumn('right')}
           >
             {localization.pinToRight}
           </Menu.Item>
           <Menu.Item
             disabled={!column.getIsPinned()}
-            icon={<IconPinnedOff />}
+            icon={<Icon icon="fluent:pin-off-24-regular" height={24} />}
             onClick={() => handlePinColumn(false)}
           >
             {localization.unpin}
@@ -207,7 +194,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
       {enableColumnResizing && column.getCanResize() && (
         <Menu.Item
           disabled={!columnSizing[column.id]}
-          icon={<IconArrowAutofitContent />}
+          icon={<Icon icon="fluent:arrow-autofit-width-dotted-24-regular" height={24} />}
           key={0}
           onClick={handleResetColumnSize}
         >
@@ -218,7 +205,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
         <>
           <Menu.Item
             disabled={!column.getCanHide()}
-            icon={<IconEyeOff />}
+            icon={<Icon icon="fluent:eye-off-24-regular" height={24} />}
             key={0}
             onClick={handleHideColumn}
           >
@@ -232,7 +219,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
               !Object.values(columnVisibility).filter((visible) => !visible)
                 .length
             }
-            icon={<IconColumns />}
+            icon={<Icon icon="fluent:table-insert-column-24-regular" height={24} />}
             key={1}
             onClick={handleShowAllColumns}
           >
@@ -291,7 +278,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any> = {}>({
                 : (actionIconProps?.sx as any)),
             })}
           >
-            <IconChevronDown />
+            <Icon icon="fluent:chevron-down-24-filled" height={20} />
           </ActionIcon>
         </Menu.Target>
       </Tooltip>

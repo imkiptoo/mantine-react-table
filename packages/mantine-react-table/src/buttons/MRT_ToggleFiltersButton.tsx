@@ -1,19 +1,17 @@
 import {type ActionIconProps, Button} from '@mantine/core';
 import {type HTMLPropsRef, type MRT_TableInstance} from '../types';
+import {Icon} from "@iconify/react";
 
-interface Props<TData extends Record<string, any> = {}>
-	extends ActionIconProps,
-		HTMLPropsRef<HTMLButtonElement> {
+interface Props<TData extends Record<string, any> = {}> extends ActionIconProps, HTMLPropsRef<HTMLButtonElement> {
 	table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ToggleFiltersButton = <
 	TData extends Record<string, any> = {},
->({table, ...rest}: Props<TData>) => {
+>({table}: Props<TData>) => {
 	const {
 		getState,
 		options: {
-			icons: {IconFilter, IconFilterOff},
 			localization,
 		},
 		setShowColumnFilters,
@@ -26,14 +24,20 @@ export const MRT_ToggleFiltersButton = <
 
 	return (
 		<Button
-			leftSection={showColumnFilters ? <IconFilterOff size={16}/> : <IconFilter size={16}/>}
-			variant="outline"
+			leftIcon={showColumnFilters ?
+				<Icon icon="fluent:filter-dismiss-24-regular" height={20} />
+				:
+				<Icon icon="fluent:filter-24-regular" height={20} />
+			}
+			variant={showColumnFilters ? "filled" : "default"}
 			aria-label={localization.showHideFilters}
 			onClick={handleToggleShowFilters}
-			{...rest}
 			styles={{
 				root: {
 					height: "1.75rem",
+				},
+				label: {
+					fontWeight: showColumnFilters ? 500 : 400,
 				}
 			}}
 		>
